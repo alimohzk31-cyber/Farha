@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>فرحة | تطبيق تعليمي للأطفال</title>
+    <meta name="description" content="تطبيق فرحة التعليمي للأطفال - تلوين، رسم، قصص، ألعاب، وحروف">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Audio Elements -->
+    <audio id="bg-music" loop>
+        <!-- Placeholder for background music -->
+    </audio>
+    <audio id="sfx-pop">
+        <!-- Placeholder for pop sound -->
+    </audio>
+    <audio id="sfx-success">
+        <!-- Placeholder for success sound -->
+    </audio>
+
+    <!-- Main Container -->
+    <div id="app-container">
+        
+        <!-- Welcome Screen -->
+        <section id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <div class="logo-box">
+                    <!-- SVG Logo Placeholder -->
+                    <svg class="app-logo" viewBox="0 0 200 200">
+                        <defs>
+                            <linearGradient id="sun-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="80" fill="url(#sun-gradient)" />
+                        <path d="M60 90 Q80 110 100 90 T140 90" stroke="#FFF" stroke-width="8" fill="none" stroke-linecap="round" />
+                        <circle cx="70" cy="70" r="10" fill="#FFF" />
+                        <circle cx="130" cy="70" r="10" fill="#FFF" />
+                        <!-- Rays -->
+                        <g stroke="#FFD700" stroke-width="10" stroke-linecap="round">
+                            <line x1="100" y1="10" x2="100" y2="-10" />
+                            <line x1="100" y1="210" x2="100" y2="190" />
+                            <line x1="10" y1="100" x2="-10" y2="100" />
+                            <line x1="210" y1="100" x2="190" y2="100" />
+                        </g>
+                    </svg>
+                </div>
+                <h1 class="app-title">فرحة</h1>
+                <p class="app-subtitle">عالم من المرح والتعلم</p>
+                <button id="start-btn" class="btn-primary pulse">ابدأ المغامرة</button>
+            </div>
+            <div class="clouds-bg"></div>
+        </section>
+
+        <!-- Home Screen -->
+        <section id="home-screen" class="screen">
+            <header class="main-header">
+                <div class="header-logo">فرحة</div>
+                <div class="header-controls">
+                    <button class="icon-btn" id="mute-btn">🔊</button>
+                    <div class="header-stars">⭐ <span id="stars-total">0</span></div>
+                </div>
+            </header>
+            
+            <div class="grid-container">
+                <!-- Coloring House -->
+                <div class="card card-coloring" onclick="navigateTo('coloring-section')">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">بيت التلوين</div>
+                </div>
+                
+                <!-- Imagination Studio -->
+                <div class="card card-drawing" onclick="navigateTo('drawing-section')">
+                    <div class="card-icon">✏️</div>
+                    <div class="card-title">مرسم الخيال</div>
+                </div>
+                
+                <!-- Story Library -->
+                <div class="card card-stories" onclick="navigateTo('stories-section')">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">مكتبة الحكايات</div>
+                </div>
+                
+                <!-- Games Club -->
+                <div class="card card-games" onclick="navigateTo('games-section')">
+                    <div class="card-icon">🎮</div>
+                    <div class="card-title">نادي الألعاب</div>
+                </div>
+                
+                <!-- Letters School -->
+                <div class="card card-letters" onclick="navigateTo('letters-section')">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title">مدرسة الحروف</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sections (Placeholders for now, will be populated by JS or static HTML below) -->
+        
+        <!-- Coloring Section -->
+        <section id="coloring-section" class="screen">
+            <header class="section-header">
+                <button class="back-btn" onclick="navigateTo('home-screen')">🔙 خروج</button>
+                <h2>بيت التلوين</h2>
+            </header>
+            <div class="images-bar" id="coloring-images"></div>
+            <div class="canvas-area">
+                <div class="canvas-stack">
+                    <canvas id="coloring-bg"></canvas>
+                    <canvas id="coloring-canvas"></canvas>
+                </div>
+            </div>
+            <div class="tools-bar">
+                <div class="colors-palette" id="coloring-colors">
+                    <!-- Colors generated by JS -->
+                </div>
+                <div class="tools-row">
+                    <div class="tool-group">
+                        <button class="tool-btn" id="brush-tool">🖌️</button>
+                        <button class="tool-btn" id="eraser-tool">🧼</button>
+                        <button class="tool-btn" id="eyedropper-tool">🎯</button>
+                    </div>
+                    <div class="tool-group size-control">
+                        <input type="range" id="coloring-size" min="1" max="40" value="8">
+                        <span class="size-value" id="size-display">8</span>
+                    </div>
+                    <div class="tool-group">
+                        <button class="tool-btn" id="coloring-undo">↩️</button>
+                        <button class="tool-btn" id="coloring-redo">↪️</button>
+                    </div>
+                    <div class="tool-group">
+                        <label class="file-input">
+                            <input type="file" id="coloring-upload" accept="image/*">
+                            📷
+                        </label>
+                        <button class="tool-btn" id="save-tool">💾</button>
+                        <button class="tool-btn" id="clear-tool">🗑️</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drawing Section -->
+        <section id="drawing-section" class="screen">
+            <header class="section-header">
+                <button class="back-btn" onclick="navigateTo('home-screen')">🔙 خروج</button>
+                <h2>مرسم الخيال</h2>
+                <button class="icon-btn" id="draw-mute">🔊</button>
+            </header>
+            <div class="drawing-layout">
+                <div class="canvas-area" id="drawing-area">
+                    <canvas id="drawing-canvas"></canvas>
+                </div>
+                <aside class="colors-rail">
+                    <div class="colors-palette" id="drawing-colors"></div>
+                    <div class="size-vertical">
+                        <input type="range" id="draw-size-vertical" min="1" max="40" value="6">
+                    </div>
+                </aside>
+            </div>
+            <div class="tools-bar">
+                <div class="actions">
+                    <button class="tool-btn active" id="draw-brush">🖌️</button>
+                    <button class="tool-btn" id="draw-pen">🖊️</button>
+                    <button class="tool-btn" id="draw-eraser">🧽</button>
+                    <div class="size-control">
+                        <span>📏</span>
+                        <input type="range" id="draw-size" min="1" max="40" value="6">
+                        <span class="size-value" id="draw-size-display">6</span>
+                    </div>
+                    <button class="tool-btn" id="draw-clear">🗑️</button>
+                    <button class="tool-btn" id="draw-save">💾</button>
+                    <button class="tool-btn" id="draw-finish">✨</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories-section" class="screen">
+            <header class="section-header">
+                <button class="back-btn" onclick="navigateTo('home-screen')">🔙 خروج</button>
+                <h2>مكتبة الحكايات</h2>
+            </header>
+            <div class="stories-grid" id="stories-list">
+                <!-- Stories populated by JS -->
+            </div>
+            <!-- Story Reader Modal -->
+            <div id="story-reader" class="hidden">
+                <button class="close-reader" onclick="closeStory()">✖</button>
+                <div class="story-frame">
+                    <div class="story-scene" id="story-scene">
+                        <div class="story-bubble" id="story-bubble"></div>
+                    </div>
+                    <div class="story-controls">
+                        <button class="story-btn" id="story-prev">⬅️ السابق</button>
+                        <div class="story-dots" id="story-dots"></div>
+                        <button class="story-btn" id="story-next">➡️ التالي</button>
+                    </div>
+                    <div class="story-audio">
+                        <button class="story-btn" id="story-play">🔊 استمع</button>
+                        <button class="story-btn" id="story-replay">↻ إعادة</button>
+                    </div>
+                </div>
+                <div class="story-finish hidden" id="story-finish">
+                    <div class="finish-emoji">🌟</div>
+                    <div class="finish-text">أحسنت! أنت بطل القصة</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games-section" class="screen">
+            <header class="section-header">
+                <button class="back-btn" onclick="navigateTo('home-screen')">🔙 خروج</button>
+                <h2>نادي الألعاب</h2>
+            </header>
+            <div class="games-container">
+                <div class="games-toolbar inline">
+                    <div class="stars">⭐ <span id="games-stars">0</span></div>
+                    <div class="level">
+                        <label for="games-level">🎯 المستوى</label>
+                        <select id="games-level">
+                            <option value="easy">سهل</option>
+                            <option value="medium">متوسط</option>
+                            <option value="hard">صعب</option>
+                        </select>
+                    </div>
+                    <button class="side-btn" onclick="scrollToGame('add')">➕ جمع</button>
+                    <button class="side-btn" onclick="scrollToGame('sub')">➖ طرح</button>
+                    <button class="side-btn" onclick="scrollToGame('mul')">✖️ ضرب</button>
+                    <button class="side-btn" onclick="scrollToGame('choice')">🎯 اختيار الإجابة</button>
+                    <button class="side-btn" onclick="scrollToGame('puzzle')">🧩 ترتيب الأرقام</button>
+                    <button class="side-btn" onclick="scrollToGame('match')">🧠 مطابقة الصور</button>
+                </div>
+
+                <div id="add" class="game-section">
+                    <h3>➕ لعبة الجمع</h3>
+                    <div class="game-box"><span id="a1"></span> + <span id="b1"></span> = <input id="ans1" inputmode="numeric"></div>
+                    <button class="game-btn" onclick="checkAdd()">تحقق</button>
+                    <div id="res1" class="game-result"></div>
+                </div>
+
+                <div id="sub" class="game-section">
+                    <h3>➖ لعبة الطرح</h3>
+                    <div class="game-box"><span id="a2"></span> − <span id="b2"></span> = <input id="ans2" inputmode="numeric"></div>
+                    <button class="game-btn" onclick="checkSub()">تحقق</button>
+                    <div id="res2" class="game-result"></div>
+                </div>
+
+                <div id="mul" class="game-section">
+                    <h3>✖️ لعبة الضرب</h3>
+                    <div class="game-box"><span id="a3"></span> × <span id="b3"></span> = <input id="ans3" inputmode="numeric"></div>
+                    <button class="game-btn" onclick="checkMul()">تحقق</button>
+                    <div id="res3" class="game-result"></div>
+                </div>
+
+                <div id="choice" class="game-section">
+                    <h3>🎯 اختر الإجابة الصحيحة</h3>
+                    <div class="choice-question"><span id="qA"></span> <span id="qOp"></span> <span id="qB"></span> = ؟</div>
+                    <div class="choice-options">
+                        <button id="opt1" class="choice-btn"></button>
+                        <button id="opt2" class="choice-btn"></button>
+                        <button id="opt3" class="choice-btn"></button>
+                    </div>
+                    <div id="resChoice" class="game-result"></div>
+                </div>
+
+                <div id="puzzle" class="game-section">
+                    <h3>🧩 ترتيب الأرقام</h3>
+                    <div class="games-toolbar inline">
+                        <div class="level">
+                            <label for="puzzle-size">🔢 الحجم</label>
+                            <select id="puzzle-size">
+                                <option value="2">2×2</option>
+                                <option value="3" selected>3×3</option>
+                            </select>
+                        </div>
+                        <button id="puzzle-reset" class="side-btn">إعادة</button>
+                        <div class="timer">⏱ <span id="puzzle-time">00:00</span></div>
+                    </div>
+                    <div id="puzzle-grid" class="puzzle-grid"></div>
+                    <div id="puzzle-msg" class="game-result"></div>
+                </div>
+
+
+                <div id="match" class="game-section">
+                    <h3>🧠 مطابقة الصور</h3>
+                    <div class="games-toolbar inline">
+                        <button id="match-reset" class="side-btn">إعادة</button>
+                        <div class="timer">⏱ <span id="match-time">00:00</span></div>
+                    </div>
+                    <div id="match-grid" class="match-grid"></div>
+                    <div id="match-msg" class="game-result"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Letters Section -->
+        <section id="letters-section" class="screen">
+            <header class="section-header">
+                <button class="back-btn" onclick="navigateTo('home-screen')">🔙 خروج</button>
+                <h2>مدرسة الحروف</h2>
+            </header>
+            <div class="letters-grid" id="letters-grid">
+                <!-- Letters populated by JS -->
+            </div>
+            <div id="letters-trace" class="letters-trace hidden">
+                <div class="trace-header">
+                    <div class="trace-letter" id="trace-letter">أ</div>
+                    <div class="trace-example">
+                        <img id="trace-img" alt="">
+                    </div>
+                </div>
+                <div class="trace-canvas-wrap">
+                    <canvas id="trace-canvas" width="320" height="320"></canvas>
+                </div>
+                <div class="trace-actions">
+                    <button class="story-btn" id="trace-back">⬅️ العودة</button>
+                    <button class="story-btn" id="trace-clear">🗑️ مسح</button>
+                    <button class="story-btn" id="trace-speak">🔊 نطق</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    
+
+    <script src="js/app.js"></script>
+</body>
+</html>
